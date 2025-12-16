@@ -31,10 +31,10 @@ trail_plot, = plt.plot([], [], 'r-', alpha = 0.5) # The trail that the craft lea
 x_trail = []
 y_trail = []
 
-tstep = 10
+tstep = 50
 # while abs(x_pos[0] - x_pos[-1]) > 0.01 and abs(y_pos[0] - y_pos[-1]) > 0.01: # Fix this so that it accounts for only one element
 for i in range(5000):
-    euler_step(planet, spacecraft, tstep)
+    RK4_step(planet, spacecraft, tstep)
     
     # Now we will work on the plotting
 
