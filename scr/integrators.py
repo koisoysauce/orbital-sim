@@ -29,4 +29,3 @@ def RK4_step(bodyL, bodyS, step):
 
     bodyS.position += step / 6 * (k1x + 2 * k2x + 2 * k3x + k4x)
     bodyS.velocity += step / 6 * (k1v + 2 * k2v + 2 * k3v + k4v)
-
