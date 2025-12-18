@@ -7,13 +7,13 @@ def euler_step(body1, body2, step):
     # bodyS.position = bodyS.position + step * bodyS.velocity
     # bodyS.velocity = bodyS.velocity + step * get_accel(bodyL, bodyS)
 
-    # Update positions
-    body1.position = body1.position + step * body1.velocity
-    body2.position = body2.position + step * body2.velocity
-
     # Update velocities
     body1.velocity = body1.velocity + step * get_accel(body1, body2)
     body2.velocity = body2.velocity + step * get_accel(body2, body1)
+
+    # Update positions
+    body1.position = body1.position + step * body1.velocity
+    body2.position = body2.position + step * body2.velocity
 
 # Implement RK4 Method
 
