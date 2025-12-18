@@ -1,5 +1,3 @@
-import numpy as np
-
 class Body:
 
     # init creates a variable for this class

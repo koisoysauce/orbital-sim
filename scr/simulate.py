@@ -10,12 +10,12 @@ plt.style.use("dark_background")
 # Earth mass: 5.97e24kg; radius: 6.371e6km
 
 '''Equal mass'''
-# body1 = Body("Earth", 5.97e24, 6.371e6, np.array([0, 0]), np.array([0, -7800.0]))
-# body2 = Body("Earth", 5.97e24, 6.371e6, np.array([5e6, 0.0]), np.array([0.0, 7800.0]))
+body1 = Body("Earth", 5.97e24, 6.371e6, np.array([0, 0]), np.array([0, -7800.0]))
+body2 = Body("Earth", 5.97e24, 6.371e6, np.array([5e6, 0.0]), np.array([0.0, 7800.0]))
 
 '''Earth and satellite'''
-body1 = Body("Earth", 5.97e24, 6.371e6, np.array([0, 0]), np.array([0, 0]))
-body2 = Body("Satellite", 100, 50, np.array([2e6, 0]), np.array([0, 7800.0]))
+# body1 = Body("Earth", 5.97e24, 6.371e6, np.array([0, 0]), np.array([0, 0]))
+# body2 = Body("Satellite", 100, 50, np.array([5e6, 0]), np.array([0, 7800.0]))
 
 # Now we can graph the positions of the spacecraft with respect to Earth
 
@@ -43,10 +43,10 @@ body2_y_trail = []
 # x_trail = []
 # y_trail = []
 
-tstep = 1
+tstep = 50
 # while abs(x_pos[0] - x_pos[-1]) > 0.01 and abs(y_pos[0] - y_pos[-1]) > 0.01: # Fix this so that it accounts for only one element
 while True:
-    euler_step(body1, body2, tstep)
+    RK4_step(body1, body2, tstep)
     
     # Now we will work on the plotting
 
