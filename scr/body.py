@@ -5,8 +5,8 @@ class Body:
         self.name = name
         self.mass = mass
         self.radius = radius
-        self.position = position # This will be in a numpy array [x, y]
-        self.velocity = velocity # This will be in a numpy array [vx, vy]
+        self.position = position # This will be in a numpy array [x, y, z]
+        self.velocity = velocity # This will be in a numpy array [vx, vy, vz]
         
 
 # We can get these variables by calling the initialized variable like so
