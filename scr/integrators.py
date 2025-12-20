@@ -2,15 +2,23 @@ from physics import *
 
 # Euler's method will return the next velocity and position values (not completely accurate)
 # This method has a lot more trouble with ellipses that are not circles
-def euler_step(body1, body2, step):
+# def euler_step(body1, body2, step):
 
-    # Update velocities
-    body1.velocity = body1.velocity + step * get_accel(body1.position, body2.position, body2.mass)
-    body2.velocity = body2.velocity + step * get_accel(body2.position, body1.position, body1.mass)
+#     # Update velocities
+#     body1.velocity = body1.velocity + step * get_accel(body1.position, body2.position, body2.mass)
+#     body2.velocity = body2.velocity + step * get_accel(body2.position, body1.position, body1.mass)
 
-    # Update positions
-    body1.position = body1.position + step * body1.velocity
-    body2.position = body2.position + step * body2.velocity
+#     # Update positions
+#     body1.position = body1.position + step * body1.velocity
+#     body2.position = body2.position + step * body2.velocity
+def euler_step(bodies, step):
+    accels = get_accel_N(bodies)
+    for i in range(len(bodies)):
+        # Update velocities
+        bodies[i].velocity = bodies[i].velocity + step * accels[i]
+
+        # Update positions
+        bodies[i].position = bodies[i].position + step * bodies[i].velocity
 
 # Implement RK4 Method
 
