@@ -1,6 +1,6 @@
 class Body:
-
     # init creates a variable for this class
+    # NOTE: ALL ARGUMENTS MUST BE FLOATS
     def __init__(self, name, mass, radius, position, velocity):
         self.name = name
         self.mass = mass

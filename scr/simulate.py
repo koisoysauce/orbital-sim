@@ -13,15 +13,15 @@ plt.style.use("dark_background")
 
 '''Earth and satellite'''
 # body1 = Body("Earth", 5.97e24, 6.371e6, np.array([0, 0, 0]), np.array([0, 0, 0]))
-# body2 = Body("Satellite", 100, 50, np.array([7e6, 0, 0]), np.array([0, 7800.0, 7800]))
+# body2 = Body("Satellite", 100, 50, np.array([7e6, 0, 0]), np.array([0, sqrt(7800.0 ** 2 / 2), sqrt(7800 ** 2 / 2)]))
 
 # bodies = [body1, body2]
 # colors = ['b', 'r']
 
 '''Our Solar System'''
-body1 = Body("Sun", 1.989e30, 7e8, np.array([0, 0, 0]), np.array([0, 0, 0]))
-body2 = Body("Earth", 5.97e24, 6.371e6, np.array([1.5e11, 0, 0]), np.array([0, 3e4, 0]))
-body3 = Body("Moon", 7.35e22, 1.737e6, np.array([1.5e11 + 3.84e8, 0, 0]), np.array([0, 3e4 + 1e3, 0]))
+body1 = Body("Sun", 1.989e30, 7.0e8, np.array([0.0, 0.0, 0.0]), np.array([0.0, 0.0, 0.0]))
+body2 = Body("Earth", 5.97e24, 6.371e6, np.array([1.5e11, 0.0, 0.0]), np.array([0.0, 3.0e4, 0.0]))
+body3 = Body("Moon", 7.35e22, 1.737e6, np.array([1.5e11 + 3.84e8, 0.0, 0.0]), np.array([0.0, 3.0e4 + 1.0e3, 0.0]))
 
 bodies = [body1, body2, body3]
 colors = ['y', 'b', 'r']
@@ -29,7 +29,7 @@ colors = ['y', 'b', 'r']
 # Function for the animation, updating the data of the position of the bodies and their trails
 
 def update(_):
-    RK4_step(bodies, tstep)
+    euler_step(bodies, tstep)
 
     # body1_x_trail.append(body1.position[0])
     # body1_y_trail.append(body1.position[1])
@@ -81,9 +81,9 @@ ax.xaxis._axinfo["grid"].update(linewidth=0.1)
 ax.yaxis._axinfo["grid"].update(linewidth=0.1)
 ax.zaxis._axinfo["grid"].update(linewidth=0.1)
 
-ax.set_xlim3d(-1e12, 1e12)
-ax.set_ylim3d(-1e12, 1e12)
-ax.set_zlim3d(-1e12, 1e12)
+ax.set_xlim3d(-1e11, 1e11)
+ax.set_ylim3d(-1e11, 1e11)
+ax.set_zlim3d(-1e11, 1e11)
 ax.set_title("Sun-Earth-Moon Simulation")
 # ax.set_xlim3d(-2e7, 2e7)
 # ax.set_ylim3d(-2e7, 2e7)
