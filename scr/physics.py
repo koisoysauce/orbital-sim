@@ -1,29 +1,23 @@
 from math import *
 import numpy as np
 
-# Acceleration from Newton's Law of Universal Gravitation
+# # Acceleration from Newton's Law of Universal Gravitation
 
-def get_accel(body1pos, body2pos, body2mass):
-    G = 6.674e-11
-    r = body2pos - body1pos # relative to body1
-    # r_mag = sqrt((body1.position[0] - body2.position[0]) ** 2 + (body1.position[1] - body2.position[1]) ** 2 + (body1.position[2] - body2.position[2]) ** 2)
-    eps = 1e-3  # small softening length for numerical safety
-    r_mag = np.linalg.norm(r) + eps # This is more efficient and accurate
+# get_accel will take in 2 numpy arrays of equal length
 
-    a1 = G * body2mass * r / r_mag ** 3 # Should be towards body2
+# The position of the elements in positions and masses is equal 
+# to the position of the elements in the bodies
 
-    return a1 # Return acceleration of first argument with regards to second argument
-
-# Net accelerations from N bodies
-
-def get_accel_N(bodies):
-    accels = []
-    total = np.zeros(3)
-    # I need to go through all bodies for each body to get their respective accelerations
-    for i in bodies:
-        for n in bodies:
-            if not i is n:
-                total += get_accel(i.position, n.position, n.mass)
-        accels.append(total)
-        total = np.zeros(3)
+def get_accels(positions, masses):
+    G = 6.674e-11 # Gravitational Constant
+    accels = np.zeros((len(positions), 3))
+    total = 0 # This will be the calculated total acceleration per body
+    for i in range(len(positions)):
+        for n in range(len(positions)):
+            if i != n:
+                r = positions[n] - positions[i]
+                r_mag = np.linalg.norm(r)
+                total += G * masses[n] * r / r_mag ** 3
+        accels[i] = total
+        total = 0
     return accels
