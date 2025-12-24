@@ -29,7 +29,7 @@ colors = ['y', 'b', 'r']
 # Function for the animation, updating the data of the position of the bodies and their trails
 
 def update(_):
-    euler_step(bodies, tstep)
+    vel_verlet_step(bodies, tstep)
 
     # body1_x_trail.append(body1.position[0])
     # body1_y_trail.append(body1.position[1])

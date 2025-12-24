@@ -2,24 +2,10 @@ from physics import *
 from body import *
 
 # Euler's method will return the next velocity and position values (not completely accurate)
-# This method has a lot more trouble with ellipses that are not circles
-# def euler_step(body1, body2, step):
 
-#     # Update velocities
-#     body1.velocity = body1.velocity + step * get_accel(body1.position, body2.position, body2.mass)
-#     body2.velocity = body2.velocity + step * get_accel(body2.position, body1.position, body1.mass)
+# This method follows the symplectic method, where we change the velocity first to ensure
+# that the body orbiting stays on track of the ideal orbit
 
-#     # Update positions
-#     body1.position = body1.position + step * body1.velocity
-#     body2.position = body2.position + step * body2.velocity
-# def euler_step(bodies, step):
-#     accels = get_accel_N(bodies)
-#     for i in range(len(bodies)):
-#         # Update velocities
-#         bodies[i].velocity = bodies[i].velocity + step * accels[i]
-
-#         # Update positions
-#         bodies[i].position = bodies[i].position + step * bodies[i].velocity
 def euler_step(bodies, step):
     positions = np.array([body.position for body in bodies])
     masses = np.array([body.mass for body in bodies])
@@ -32,7 +18,12 @@ def euler_step(bodies, step):
         # Update positions
         bodies[i].position += step * bodies[i].velocity
 
-# Implement RK4 Method
+# RK4 Method
+
+# This method is more accurate at calculating the next position and velocity
+# than the euler method. 
+# However, this method cannot follow the symplectic method, so it cannot
+# ensure that the body stays within the ideal orbit through a long period of time.
 
 def RK4_step(bodies, step):
     positions = np.array([body.position for body in bodies])
@@ -58,4 +49,20 @@ def RK4_step(bodies, step):
         bodies[i].position = new_positions[i]
         bodies[i].velocity = new_velocities[i]
 
-# TODO: Learn Symplectic Integrators (Leapfrog, Verlet)
+# TODO: Learn Symplectic Integrators (Leapfrog, Verlet, Yoshida 4th order)
+
+# Velocity Verlet Method
+
+def vel_verlet_step(bodies, step):
+    positions = np.array([body.position for body in bodies])
+    velocities = np.array([body.velocity for body in bodies])
+    masses = np.array([body.mass for body in bodies])
+    accels = get_accels(positions, masses)
+
+    new_positions = positions + velocities * step + 0.5 * accels * step ** 2
+    new_accels = get_accels(new_positions, masses)
+    new_velocities = velocities + 0.5 * (accels + new_accels) * step
+
+    for i in range(len(bodies)):
+        bodies[i].position = new_positions[i]
+        bodies[i].velocity = new_velocities[i]
