@@ -47,6 +47,10 @@ ax.set_xlim3d(-1e11, 1e11)
 ax.set_ylim3d(-1e11, 1e11)
 ax.set_zlim3d(-1e11, 1e11)
 ax.set_title("Sun-Earth-Moon Simulation")
+# ax.set_xlim3d(-1e9, 1e9)
+# ax.set_ylim3d(-1e9, 1e9)
+# ax.set_zlim3d(-1e9, 1e9)
+# ax.set_title("2-Body Simulation")
 
 xyz_trails = []
 

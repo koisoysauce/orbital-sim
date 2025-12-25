@@ -7,6 +7,9 @@ class Body:
         self.radius = radius
         self.position = position # This will be in a numpy array [x, y, z]
         self.velocity = velocity # This will be in a numpy array [vx, vy, vz]
+
+    def copy(self):
+        return Body(self.name, self.mass, self.radius, self.position.copy(), self.velocity.copy())
         
 
 # We can get these variables by calling the initialized variable like so
