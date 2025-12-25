@@ -49,8 +49,6 @@ def RK4_step(bodies, step):
         bodies[i].position = new_positions[i]
         bodies[i].velocity = new_velocities[i]
 
-# TODO: Learn Symplectic Integrators (Leapfrog, Verlet, Yoshida 4th order)
-
 # Velocity Verlet Method
 
 def vel_verlet_step(bodies, step):

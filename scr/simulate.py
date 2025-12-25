@@ -1,55 +1,17 @@
 from integrators import *
 from physics import *
 from body import *
+from constants import *
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 plt.style.use("dark_background")
 
-'''Equal mass'''
-# Earth mass: 5.97e24kg; radius: 6.371e6km
-# body1 = Body("Earth", 5.97e24, 6.371e6, np.array([0, 0, 0]), np.array([0, -7800.0, 0]))
-# body2 = Body("Earth", 5.97e24, 6.371e6, np.array([5e6, 0, 0]), np.array([0.0, 7800.0, 2600.0]))
-
-'''Earth and satellite'''
-# body1 = Body("Earth", 5.97e24, 6.371e6, np.array([0, 0, 0]), np.array([0, 0, 0]))
-# body2 = Body("Satellite", 100, 50, np.array([7e6, 0, 0]), np.array([0, sqrt(7800.0 ** 2 / 2), sqrt(7800 ** 2 / 2)]))
-
-# bodies = [body1, body2]
-# colors = ['b', 'r']
-
-'''Our Solar System'''
-body1 = Body("Sun", 1.989e30, 7.0e8, np.array([0.0, 0.0, 0.0]), np.array([0.0, 0.0, 0.0]))
-body2 = Body("Earth", 5.97e24, 6.371e6, np.array([1.5e11, 0.0, 0.0]), np.array([0.0, 3.0e4, 0.0]))
-body3 = Body("Moon", 7.35e22, 1.737e6, np.array([1.5e11 + 3.84e8, 0.0, 0.0]), np.array([0.0, 3.0e4 + 1.0e3, 0.0]))
-
-bodies = [body1, body2, body3]
-colors = ['y', 'b', 'r']
-
 # Function for the animation, updating the data of the position of the bodies and their trails
 
 def update(_):
-    vel_verlet_step(bodies, tstep)
+    vel_verlet_step(bodies, timestep)
 
-    # body1_x_trail.append(body1.position[0])
-    # body1_y_trail.append(body1.position[1])
-    # body1_z_trail.append(body1.position[2])
-
-    # body2_x_trail.append(body2.position[0])
-    # body2_y_trail.append(body2.position[1])
-    # body2_z_trail.append(body2.position[2])
-
-    # body1_plot.set_data([body1.position[0]], [body1.position[1]])
-    # body1_plot.set_3d_properties([body1.position[2]])
-    # body1_trail.set_data(body1_x_trail, body1_y_trail)
-    # body1_trail.set_3d_properties(body1_z_trail)
-
-    # body2_plot.set_data([body2.position[0]], [body2.position[1]])
-    # body2_plot.set_3d_properties([body2.position[2]])
-    # body2_trail.set_data(body2_x_trail, body2_y_trail)
-    # body2_trail.set_3d_properties(body2_z_trail)
-
-    # return (body1_plot, body2_plot, body1_trail, body2_trail)
     for i in range(len(bodies)):
         # Add new position to trail properties
 
@@ -85,20 +47,7 @@ ax.set_xlim3d(-1e11, 1e11)
 ax.set_ylim3d(-1e11, 1e11)
 ax.set_zlim3d(-1e11, 1e11)
 ax.set_title("Sun-Earth-Moon Simulation")
-# ax.set_xlim3d(-2e7, 2e7)
-# ax.set_ylim3d(-2e7, 2e7)
-# ax.set_zlim3d(-2e7, 2e7)
-# ax.set_title("2 Body Orbital")
 
-# List of data that will be updating per frame
-
-# body1_x_trail = [body1.position[0]]
-# body1_y_trail = [body1.position[1]]
-# body1_z_trail = [body1.position[2]]
-
-# body2_x_trail = [body2.position[0]]
-# body2_y_trail = [body2.position[1]]
-# body2_z_trail = [body2.position[2]]
 xyz_trails = []
 
 for i in bodies:
@@ -107,11 +56,6 @@ for i in bodies:
 
 # Static initial plots
 
-# body1_plot, = ax.plot(body1.position[0], body1.position[1], body1.position[2], 'bo')
-# body1_trail, = ax.plot(body1_x_trail, body1_y_trail, body1_z_trail, 'b-')
-
-# body2_plot, = ax.plot(body2.position[0], body2.position[1], body2.position[2], 'ro')
-# body2_trail, = ax.plot(body2_x_trail, body2_y_trail, body2_z_trail, 'r-')
 plots = []
 trails = []
 
@@ -121,7 +65,6 @@ for i in range(len(bodies)):
 
 # Initiate animation
 
-tstep = 10000
 ani = animation.FuncAnimation(fig, update, interval=20, blit=False, cache_frame_data=False)
 
 plt.show()
